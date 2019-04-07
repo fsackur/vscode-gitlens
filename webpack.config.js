@@ -307,6 +307,35 @@ function getWebviewsConfig(mode, env) {
 					: false,
 		}),
 		new HtmlPlugin({
+			template: 'timeline/index.html',
+			chunks: ['timeline', 'timeline-styles'],
+			excludeAssets: [/.+-styles\.js/],
+			filename: path.resolve(__dirname, 'dist/webviews/timeline.html'),
+			inject: true,
+			inlineSource: mode === 'production' ? '.css$' : undefined,
+			cspPlugin: {
+				enabled: true,
+				policy: cspPolicy,
+				nonceEnabled: {
+					'script-src': true,
+					'style-src': true,
+				},
+			},
+			minify:
+				mode === 'production'
+					? {
+							removeComments: true,
+							collapseWhitespace: true,
+							removeRedundantAttributes: true,
+							useShortDoctype: true,
+							removeEmptyAttributes: true,
+							removeStyleLinkTypeAttributes: true,
+							keepClosingSlash: true,
+							minifyCSS: true,
+					  }
+					: false,
+		}),
+		new HtmlPlugin({
 			template: 'welcome/welcome.html',
 			chunks: ['welcome', 'welcome-styles'],
 			excludeAssets: [/.+-styles\.js/],
@@ -365,6 +394,8 @@ function getWebviewsConfig(mode, env) {
 			'rebase-styles': ['./scss/rebase.scss'],
 			settings: ['./settings/settings.ts'],
 			'settings-styles': ['./scss/settings.scss'],
+			timeline: ['./timeline/index.ts'],
+			'timeline-styles': ['./scss/timeline.scss'],
 			welcome: ['./welcome/welcome.ts'],
 			'welcome-styles': ['./scss/welcome.scss'],
 		},
