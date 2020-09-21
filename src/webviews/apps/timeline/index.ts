@@ -4,12 +4,12 @@ import {
 	IpcMessage,
 	onIpcNotification,
 	TimelineClickCommandType,
-	TimelineDidChangeDataNotificationType
+	TimelineDidChangeDataNotificationType,
 } from '../../protocol';
 import { App } from '../shared/appBase';
 import { ClickedEvent, TimelineChart } from './chart';
 
-export class TimelineApp extends App<undefined> {
+export class TimelineApp extends App {
 	private _chart: TimelineChart | undefined;
 
 	constructor() {
