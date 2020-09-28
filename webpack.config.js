@@ -307,7 +307,7 @@ function getWebviewsConfig(mode, env) {
 					: false,
 		}),
 		new HtmlPlugin({
-			template: 'timeline/index.html',
+			template: 'timeline/timeline.html',
 			chunks: ['timeline', 'timeline-styles'],
 			excludeAssets: [/.+-styles\.js/],
 			filename: path.resolve(__dirname, 'dist/webviews/timeline.html'),
@@ -394,7 +394,7 @@ function getWebviewsConfig(mode, env) {
 			'rebase-styles': ['./scss/rebase.scss'],
 			settings: ['./settings/settings.ts'],
 			'settings-styles': ['./scss/settings.scss'],
-			timeline: ['./timeline/index.ts'],
+			timeline: ['./timeline/timeline.ts'],
 			'timeline-styles': ['./scss/timeline.scss'],
 			welcome: ['./welcome/welcome.ts'],
 			'welcome-styles': ['./scss/welcome.scss'],
