@@ -10,7 +10,7 @@ import { App } from '../shared/appBase';
 import { ClickedEvent, TimelineChart } from './chart';
 
 export class TimelineApp extends App {
-	private _chart: TimelineChart | undefined;
+	private _chart!: TimelineChart;
 
 	constructor() {
 		super('TimelineApp', undefined);
@@ -22,7 +22,7 @@ export class TimelineApp extends App {
 	}
 
 	private onChartClicked(e: ClickedEvent) {
-		this.sendCommand(TimelineClickCommandType, e);
+		// this.sendCommand(TimelineClickCommandType, e);
 	}
 
 	protected onMessageReceived(e: MessageEvent) {
@@ -31,7 +31,7 @@ export class TimelineApp extends App {
 		switch (msg.method) {
 			case TimelineDidChangeDataNotificationType.method:
 				onIpcNotification(TimelineDidChangeDataNotificationType, msg, params => {
-					this._chart!.updateChart(params.data);
+					this._chart.updateChart(params.data);
 				});
 				break;
 
