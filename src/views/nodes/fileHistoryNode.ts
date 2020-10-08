@@ -42,7 +42,7 @@ export class FileHistoryNode extends SubscribeableViewNode implements PageableVi
 		const children: ViewNode[] = [];
 
 		if (this.uri.sha === undefined) {
-			const status = await Container.git.getStatusForFile(this.uri.repoPath!, this.uri.fsPath);
+			const status = await Container.git.getStatusForFile(this.uri.repoPath!, this.uri.relativeFsPath);
 			if (status !== undefined && (status.indexStatus !== undefined || status.workingTreeStatus !== undefined)) {
 				let sha;
 				let previousSha;
@@ -180,7 +180,7 @@ export class FileHistoryNode extends SubscribeableViewNode implements PageableVi
 	private _log: GitLog | undefined;
 	private async getLog() {
 		if (this._log === undefined) {
-			this._log = await Container.git.getLogForFile(this.uri.repoPath, this.uri.fsPath, {
+			this._log = await Container.git.getLogForFile(this.uri.repoPath, this.uri.relativeFsPath, {
 				limit: this.limit ?? this.view.config.defaultItemLimit,
 				ref: this.uri.sha
 			});
